@@ -10,6 +10,10 @@ import javafx.stage.Window;
 
 public class RegisterController {
     @FXML
+    private Button viewPassword;
+    @FXML
+    private TextField textField;
+    @FXML
     private Label welcomeText;
 
     @FXML
@@ -28,7 +32,27 @@ public class RegisterController {
         com.example.tutorial.JdbcDao jdbcDao = new com.example.tutorial.JdbcDao();
         jdbcDao.retrieveRecords();
 
+    }
 
+    @FXML
+    public void viewPassword(ActionEvent event) {
+        if (passwordField.isVisible()) {
+            textField.setText(passwordField.getText());
+            textField.setVisible(true);
+            textField.setManaged(true);
+
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+            viewPassword.setText("Hide");
+        } else {
+            passwordField.setText(textField.getText());
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+
+            textField.setVisible(false);
+            textField.setManaged(false);
+            viewPassword.setText("View");
+        }
     }
     @FXML
     public void register(ActionEvent event) throws SQLException {
@@ -44,7 +68,7 @@ public class RegisterController {
             return;
         }
 
-        if (emailIdField.getText().isEmpty()) {
+        if (emailIdField.getText().isEmpty() ) {
             showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "please enter a password");
             return;
