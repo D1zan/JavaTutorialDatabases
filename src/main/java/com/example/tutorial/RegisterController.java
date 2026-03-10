@@ -2,7 +2,6 @@ package com.example.tutorial;
 
 import java.sql.SQLException;
 import javafx.scene.control.Alert;
-
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.fxml.FXML;
@@ -28,8 +27,8 @@ public class RegisterController {
     public void records(ActionEvent event) throws SQLException {
         com.example.tutorial.JdbcDao jdbcDao = new com.example.tutorial.JdbcDao();
         jdbcDao.retrieveRecords();
-        //com.example.tutorial. is the folder the file jdbcDao is in
-        //
+
+
     }
     @FXML
     public void register(ActionEvent event) throws SQLException {

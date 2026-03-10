@@ -1,4 +1,6 @@
 package com.example.tutorial;
+import javafx.scene.control.Alert;
+
 import java.sql.*;
 
 public class JdbcDao {
@@ -32,21 +34,27 @@ public class JdbcDao {
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(SELECT_QUERY)) {
-            System.out.println("Records in Data");
+
+            StringBuilder allRecords = new StringBuilder();
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 String name = resultSet.getString("full_name");
                 String email = resultSet.getString("email_id");
                 String password = resultSet.getString("password");
 
-                System.out.println(
-                        " |ID: " + id +
-                        " |Name: " + name +
-                        " |Email: " + email +
-                        " |Password" + password
-
-                );
+                allRecords.append("ID: ").append(id)
+                        .append(" |Name: ").append(name)
+                        .append(" |Email: ").append(email)
+                        .append(" |Password: ").append(password)
+                        .append("\n");
             }
+            Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+            infoAlert.setTitle("Records");
+            infoAlert.setHeaderText("Showing all Records");
+
+            infoAlert.setContentText(allRecords.toString());
+            infoAlert.showAndWait();
+
         }
 
     }
@@ -66,3 +74,5 @@ public class JdbcDao {
         }
     }
 }
+//You need to separate the code
+//THis is the database file, not the command file
